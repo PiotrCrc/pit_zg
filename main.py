@@ -3,50 +3,6 @@ import csv
 import datetime
 
 
-class ExchangeRate:
-    symbol: str
-    list_of_rates: []
-
-    def __init__(self, symbol):
-        self.symbol = symbol
-        self.list_of_rates = []
-
-    def __repr__(self):
-        return self.symbol
-
-    def add_rate(self, rate_date, rate):
-        self.list_of_rates.append(self.RateAtDate(rate_date, rate))
-
-    def get_previous_date_rate(self, rate_date):
-        if (len(self.list_of_rates) > 1):
-            self.list_of_rates.sort(key=lambda x: x.rate_date)
-        previous_date_rate = 0
-        for rate_at_date in self.list_of_rates:
-            if (rate_at_date.rate_date >= rate_date):
-                # print("0",rate_at_date.rate_date, previous_date_rate)
-                if (previous_date_rate != 0):
-
-                    return previous_date_rate
-                else:
-                    sys.exit("rate " + str(rate_date) + " don't exist in csv")
-                    return "rate not available"
-
-            else:
-                previous_date_rate = rate_at_date.rate
-                # print("1",rate_at_date.rate_date, previous_date_rate)
-
-    class RateAtDate:
-        rate_date: datetime.date
-        rate: float
-
-        def __init__(self, rate_date, rate):
-            self.rate = rate
-            self.rate_date = rate_date
-
-        def __repr__(self):
-            return self.rate_date.strftime("%Y %m %d") + " " + str(self.rate)
-
-
 class TransactionRecord:
     def __init__(self, id_nr, symbol, operation,
                  date_time, amount, currency, amount_eur, account_id='', comment=''):
